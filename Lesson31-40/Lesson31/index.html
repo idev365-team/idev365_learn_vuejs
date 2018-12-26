@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+           
+        </style>
+    </head>
+    <body>
+        <div id="app">
+        </div>
+        <script>
+            Vue.mixin({
+                created:function(){
+                    console.log("This is global mixin created");
+                    var myOption = this.$options.myOption
+                    if(myOption){
+                        console.log(myOption)
+                    }
+                }
+            })
+            var mixin = {
+                created:function(){
+                    console.log("This is local mixin created")
+                }
+            }
+            var app = new Vue({
+                el: '#app',
+                mixins:[ mixin ],
+                // myOption:'Hello!',
+                data: function(){
+                    return {
+                        message:"goodbye",
+                        bar:'def'
+                    }
+                },
+                created:function(){
+                    console.log("this a vue instance created->",this.$data);
+                }
+            })
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+           
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <input v-model="message">
+            {{ message | capitalize | filterB('a','b')}}
+        </div>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                filters:{
+                    capitalize:function(value){
+                        if(!value) return '';
+                        value = value.toString()
+                        return value.charAt(0).toUpperCase() + value.slice(1);
+                    },
+                    filterB:function(value,arg1,arg2){
+                        if(!value) return '';
+                        value = value.toString()
+                        console.log("filterB:",value,arg1,arg2)
+                        return value + "---filter B"
+                    }
+                },
+                data: {
+                    message:'jim'
+                },
+               
+            })
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .tab{
+                border:solid 1px lightslategray;
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div>
+                <div>currentTabComponent:{{currentTabComponent}}</div>
+                <button @click="changeTab('Tab01')">Tab01</button>
+                <button @click="changeTab('Tab02')">Tab02</button>
+                <button @click="changeTab('async-example')">async-example</button>
+            </div>
+            <div>
+                <keep-alive>
+                    <component v-bind:is="currentTabComponent"></component>
+                </keep-alive>
+            </div>
+        </div>
+        <script>
+            Vue.component('async-example',function(resolve,reject){
+                setTimeout(function(){
+                    resolve({
+                        template:'<div>I am async!</div>'
+                    })
+                },1000)
+            })
+            Vue.component('Tab01',{
+                data:function(){
+                    return {
+                        count:0,
+                    }
+                },
+                methods:{
+                    addCount(){
+                        this.count ++
+                    }
+                },
+                template:`
+                    <div class="tab">
+                        Counter:{{count}}
+                        <button @click="addCount">Add 1</button>
+                    </div>
+                `
+            })
+
+            Vue.component('Tab02',{
+                data:function(){
+                    return {
+                        count:100,
+                    }
+                },
+                methods:{
+                    subCount(){
+                        this.count --
+                    }
+                },
+                template:`
+                    <div class="tab">
+                        This is Tab02  Counter:{{count}}
+                        <button @click="subCount">Sub 1</button>
+                    </div>
+                `
+            })
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    currentTabComponent:"Tab01"
+                },
+                methods:{
+                   changeTab:function(tabName){
+                       this.currentTabComponent = tabName
+                   }
+                }
+            })
+        </script>
+    </body>
+</html>

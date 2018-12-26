@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+           
+        </style>
+    </head>
+    <body>
+        <div id="app" >
+            <div v-color-swatch="{}">Hello</div>
+        </div>
+        <script>
+            Vue.directive('demo',{
+                bind(el,binding,vnode){ 
+                    var s = JSON.stringify
+                    el.innerHTML = `
+                        name:${s(binding.name)}<br>
+                        value:${s(binding.value)}<br>
+                        expression:${s(binding.expression)}<br>
+                        argument:${s(binding.arg)}<br>
+                        modifiers:${s(binding.modifiers)}<br>
+                        vnode keys:${ Object.keys(vnode).join(', ')}<br>
+                    `
+                 },
+            })
+            Vue.directive('color-swatch',function(el,binding){
+                
+                if(binding.value.hasOwnProperty("bgColor")){
+                    el.style.backgroundColor = binding.value.bgColor;
+                }
+                if(binding.value.hasOwnProperty("color")){
+                    el.style.color = binding.value.color;
+                }
+            })
+            var app = new Vue({
+                el: '#app',
+                data: {
+                },
+               
+            })
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .username-input{
+                border:solid 1px lightblue;
+                padding:5px 10px;
+                border-radius: 3px;
+                background-color: lightblue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <base-input class="username-input" placeholder="请填写用户名" label="name" value=""/>
+        </div>
+        <script>
+            Vue.component('base-input',{
+                inheritAttrs:false,
+                props:['label','value'],
+                template:`
+                    <label>
+                        {{ label }}
+                        <input 
+                            v-bind="$attrs"
+                            v-bind:value="value"
+                            v-on:input="$emit('input',$event.target.value)"
+                        >
+                    </label>
+                `
+            })
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                },
+            })
+        </script>
+    </body>
+</html>

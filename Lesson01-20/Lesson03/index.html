@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <a @click="onSubmit">Click Me</a>
+        </div>
+        <script>
+          new Vue({
+            el:"#app",
+            data:{
+                url:"http://www.baidu.com/"
+            },
+            methods:{
+                onSubmit:function(){
+                    alert("You Submit Me")
+                }
+            }
+          })
+        </script>
+    </body>
+</html>

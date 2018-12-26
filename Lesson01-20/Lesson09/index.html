@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+       
+    </head>
+    <body>
+       <div id="app">
+            <div v-show="isShow">
+                <button @click="toggle">Toggle login type</button>
+            </div>
+            
+       </div>
+       <script>
+           var vm = new Vue({
+                el:"#app",
+                data:{
+                    isShow:true,
+                    loginType:"username",
+                },
+                methods:{
+                    toggle:function(){
+                        this.loginType = this.loginType==="username" ? "email":"username"
+                    }
+                }
+           })
+       </script>
+    </body>
+</html>

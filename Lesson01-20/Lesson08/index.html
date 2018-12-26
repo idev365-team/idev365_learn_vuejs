@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .header{
+                padding:5px 10px;
+                background-color: yellow;
+            }
+            .green{
+                color:green;
+            }
+            .border{
+                border:solid 1px gray;
+            }
+            .foo{
+                color:red;
+            }
+            .bar{
+                border:solid 1px red;
+            }
+            .baz{
+                font-weight: 900;
+                font-size: 30px;
+            }
+            .boo{
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+       <div id="app">
+        <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">Test</div>
+
+       </div>
+       <script>
+           var vm = new Vue({
+                el:"#app",
+                data:{
+                },
+           })
+       </script>
+    </body>
+</html>

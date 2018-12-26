@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .container{
+                height:50px;
+                border:solid 2px black;
+                overflow: auto;
+            }
+            .scrollView{
+                height:800px;
+                background-color:yellow;
+            }
+        </style>
+    </head>
+    <body>
+            <div id="app">
+                <input v-on:keydown.enter="say('enter')" />
+            </div>
+       <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    name:"Vue.js"
+                },
+                methods:{
+                    say:function(msg){
+                        console.log(msg)
+                    }
+                }
+            })
+
+       </script>
+    </body>
+</html>

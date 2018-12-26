@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="onClickMe">
+                foo: {{ foo }}
+            </button>
+
+            <container>
+                1111
+                <my-button></my-button>
+                <my-button></my-button>
+            </container>
+
+
+            <container>
+                222222
+                <my-button></my-button>
+                <my-button></my-button>
+            </container>
+        </div>
+        <script>
+            Vue.component('container',{
+                data:function(){
+                    return {
+                        count:0,
+                    }
+                },
+                provide:function(){
+                    return {
+                        addCount:this.addCount,
+                        getCount:this.getCount,
+                    }
+                },
+                methods:{
+                    addCount(){
+                        this.count++
+                    },
+                    getCount(){
+                        return this.count
+                    }
+                },
+                template:`
+                    <div>
+                        <p>count: {{ count }}</p>
+                        <slot></slot>
+                    </div>
+                `
+            })
+            Vue.component('my-button',{
+                inject:['addCount',"getCount"],
+                methods:{
+                    onClickMe(){
+                        console.log("my-button ->click",this)
+                        this.addCount()
+                    }
+                },
+                template:`<button @click="onClickMe">Click</button>`
+            })
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    foo:1,
+                },
+                computed:{
+                    bar:function(){
+                        return "bar"
+                    }
+                },
+                methods:{
+                    baz:function(){
+                        return "baz"
+                    },
+                    onClickMe:function(){
+                        console.log("this.$refs->",this.$refs)
+                        let $mybtn = this.$refs.mybtn
+                        $mybtn.onClickMe();
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+           
+        </style>
+    </head>
+    <body>
+        <div id="app">
+           <message-box>
+                This is a message.
+           </message-box>
+        </div>
+        <script>
+            Vue.component('message-box',{
+                // render:function(createElement){
+                //     var me = this;
+                //     return createElement('div',{
+                //         attrs:{
+                //             style:'color:blue;border:solid 1px blue;padding:10px 5px;border-radius:5px;'
+                //         }
+                //     },me.$slots.default)
+                // },
+                template:`
+                    <div style='color:blue;border:solid 1px blue;padding:10px 5px;border-radius:5px;'>
+                     <slot></slot>
+                    </div>
+                `
+            })
+            Vue.component('title-bar',{
+                props:['value'],
+                // template:`
+                //     <input :value="title" v-on:input="onChange">
+                // `,
+
+                render:function(createElement){
+                    var self = this;
+                    return createElement('input',{
+                        domProps:{
+                            value:self.value
+                        },
+                        on:{
+                            input:function(event){
+                                self.$emit('input',event.target.value)
+                            },
+                            keyup:function(event){
+                                // console.log("keyup-->",event);
+                                self.$emit('keyup',event);
+                            }
+                        }
+                    })
+                },
+                methods:{
+                    onChange(event){
+                        const value = event.target.value;
+                        console.log("event",value);
+                        // this.$emit('input',value)
+                        
+                    }
+                }
+            })
+            Vue.component('list-names',{
+                props:['items'],
+                // template:`
+                //     <ul v-if="items.length">
+                //         <li v-for="item in items">{{ item.name }}</li>
+                //     </ul>
+                //     <p v-else>No items found.</p>
+                // `
+
+                render:function( createElement ){
+                    var self = this
+                    if(this.items.length){
+                        return createElement('ul',this.items.map(function(item){
+                            return createElement('li',item.name)
+                        }))
+                    }else{
+                        return createElement('p','No items found.')
+                    }
+                }
+            })
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    title:"ABC",
+                    items:[
+                        {name:'Jim'},
+                        {name:'Anny'},
+                        {name:'John'},
+                    ]
+                },
+                methods:{
+                    showKeyUp(event){
+                        console.log("Vue Instance ->showKeyUp-->event:",event);
+                    }
+                }
+               
+            })
+        </script>
+    </body>
+</html>
+

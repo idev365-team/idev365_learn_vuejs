@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+           
+        </style>
+    </head>
+    <body>
+        <div id="app" v-my-directive>
+            <button v-on:click="onPressMe">Click Me</button>
+        </div>
+        <script>
+            var MyPlugin = {};
+            MyPlugin.install =function(Vue,options){
+                console.log("MyPlugin installed");
+                Vue.myGlobleMethod=function(){
+                    console.log("this is myGlobleMethod")
+                }
+                Vue.directive('my-directive',{
+                    bind(el,binding,vnode,oldVnode){
+                        console.log("my-directive  -->call bind")
+                    }
+                })
+                Vue.mixin({
+                    created:function(){
+                        console.log("MyPlugin called mixin on created func")
+                    }
+                })
+                Vue.prototype.$myMethod = function( methodOptions ){
+                    console.log("call $myMethod")
+                }
+            }
+
+            Vue.use(MyPlugin);
+            var app = new Vue({
+                el: '#app',
+                data: {
+                  
+                },
+                methods:{
+                    onPressMe(){
+                        // this.$myMethod()
+                        Vue.myGlobleMethod();
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
+

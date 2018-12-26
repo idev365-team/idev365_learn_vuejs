@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <blog-post title="hello!" :likes='42' :is-published="true" :author="{name:'Jim',age:25}" :comment-ids='[1,2,3]'></blog-post>
+        </div>
+        <script>
+            Vue.component('blog-post',{
+                props:{
+                    title:String,
+                    likes:Number,
+                    isPublished:Boolean,
+                    commentIds:Array,
+                    author:Object,
+                },
+                template:'<h3>{{ title }} {{ likes }}</h3>'
+            })
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                },
+            })
+        </script>
+    </body>
+</html>

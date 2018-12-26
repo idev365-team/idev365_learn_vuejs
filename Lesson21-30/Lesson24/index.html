@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+        </style>
+         <script>
+                function main(){
+                    
+                    Vue.component('terms-of-service', {
+                    template: `
+                        <div v-once>
+                        <h1>Terms of Service</h1>
+                        ... a lot of static content ...
+                        </div>
+                    `
+                    })
+
+                    Vue.component('my-button',{
+                        props:{
+                            count:{
+                                type:Number,
+                                default:3,
+                            },
+                            maxCount:{
+                                type:Number,
+                                default:6,
+                            }
+                        },
+                        template:"#hello-world-template"
+                    })
+                    var app = new Vue({
+                        el: '#app',
+                        data: {
+                            counter:0,
+                        },
+                        methods:{
+                        
+                        }
+                    })
+                }
+            </script>
+    </head>
+    <body onload="main()">
+        <div id="app">
+            <my-button ></my-button>
+            <terms-of-service></terms-of-service>
+        </div>
+        <script type="text/x-template" id="hello-world-template">
+            <div>
+                    This is a template button {{ count }}
+                    <my-button :count="parseInt(count)+1" v-if='count<maxCount'></my-button>
+                    
+                </div>
+        </script>
+    </body>
+</html>

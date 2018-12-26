@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .container{
+                border:solid 1px lightseagreen;
+            }
+            header{
+                background-color: lightcoral;
+                padding:5px;
+            }
+            main{
+                background-color: lightskyblue;
+                padding:5px;
+            }
+            footer{
+                background-color: lightgoldenrodyellow;
+                padding:5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <base-layout>
+                <h1 slot="header">This is Title</h1>
+                <p slot="main">
+                    This is Main Body.
+                    <submit-button btnname="ABC">
+                        <template slot-scope="slotScope">
+                            {{slotScope.title}}
+                        </template>
+                    </submit-button>
+                </p>
+                <a href="#" slot="footer">@山地人 2018</a>
+            </base-layout>
+        </div>
+        <script>
+
+
+            Vue.component('submit-button',{
+                props:['btnname'],
+                template:`
+                    <button type="submit">
+                        <slot v-bind:title="btnname">{{btnname}}</slot>
+                    </button>
+                `
+            })
+
+            Vue.component('say-hello',{
+                template:`
+                    <h2>Hello World</h2>
+                `
+            })
+            Vue.component('navigation-link',{
+                props:["url"],
+                template:`
+                    <a v-bind:href="url">
+                        <slot></slot>
+                    </a>
+                `
+            })
+            Vue.component('base-layout',{
+                template:`
+                    <div class="container">
+                        <header>
+                            <slot name="header"></slot>
+                        </header>
+                        <main>
+                            <slot name="main"></slot>
+                        </main>
+                        <footer>
+                            <slot name="footer"></slot>
+                        </footer>
+                    </div>
+                `
+            })
+
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    title:"Hello World",
+                },
+                methods:{
+                }
+            })
+        </script>
+    </body>
+</html>

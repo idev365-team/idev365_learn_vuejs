@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <div>Hello World {{a}}</div>
+        </div>
+        <script>
+          var vm = new Vue({
+              el:"#app",
+              template:"<div>Hello World {{a}}</div>",
+              data:{
+                  a: 1
+              },
+              beforeCreate:function(){
+                console.log("call beforeCreate()")
+              },
+              created:function(){
+                  console.log("call created()")
+              },
+              beforeMount:function(){
+                console.log("call beforeMount()")
+              },
+              mounted:function(){
+                console.log("call mounted()")
+              },
+              beforeUpdate:function(){
+                console.log("call beforeUpdate()")
+              },
+              updated:function(){
+                console.log("call updated()")
+              },
+              beforeDestroy:function(){
+                console.log("call beforeDestroy()")
+              },
+              destroyed:function(){
+                console.log("call destroyed()")
+              },
+          })
+        </script>
+    </body>
+</html>

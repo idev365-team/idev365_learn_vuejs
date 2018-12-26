@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .demo-alert-box{
+                padding: 10px 20px;
+                background: #f3beb8;
+                border: 1px solid #f09898;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+                <component v-bind:is="currentTabComponent">
+                    <div>Tab 1</div>
+                </component>
+        </div>
+        <script>
+            Vue.component('tab01', {
+                template: `
+                    <div class="demo-alert-box">
+                        <strong>1Error!</strong>
+                        <slot></slot>
+                    </div>
+                `
+                })
+
+           Vue.component('tab02', {
+            template: `
+                <div class="demo-alert-box">
+                    <strong>2Error!</strong>
+                    <slot></slot>
+                </div>
+            `
+            })
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    currentTabComponent:"tab01",
+                },
+            })
+        </script>
+    </body>
+</html>

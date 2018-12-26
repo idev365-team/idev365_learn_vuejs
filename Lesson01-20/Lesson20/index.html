@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <text-document 
+                v-bind:title="doc.title" 
+                v-bind:author="doc.author" 
+                v-on:update:title="doc.title = $event"
+                v-on:update:author="doc.author = $event"
+            ></text-document>
+
+            <text-document 
+                v-bind:title.sync="doc.title"
+                v-bind:author.sync="doc.author"
+            ></text-document>
+
+
+            <text-document 
+                v-bind.sync="doc"
+            ></text-document>
+
+        </div>
+        <script>
+            Vue.component('text-document',{
+                props:['title',"author"],
+                template:`
+                    <div>
+                        {{ title }} - {{ author }}
+                        <input v-on:input="inputChangedTitle">
+                        <input v-on:input="inputChangedAuthor">
+                    </label>
+                `,
+                methods:{
+                    inputChangedTitle:function(event){
+                        let newValue = event.target.value
+                        console.log("inputChangedTitle",newValue)
+                        this.$emit('update:title',newValue)
+                    },
+                    inputChangedAuthor:function(event){
+                        let newValue = event.target.value
+                        console.log("inputChangedAuthor",newValue)
+                        this.$emit('update:author',newValue)
+                    }
+                }
+            })
+
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    doc:{
+                        title:"Hello World",
+                        author:'Jimmy',
+                    }
+                },
+                methods:{
+                    onFocus:function(){
+                        console.log("onFocus called")
+                    },
+                    onUpdateTitle:function(title){
+                        console.log("onUpdateTitle called")
+                        this.doc.title = title
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

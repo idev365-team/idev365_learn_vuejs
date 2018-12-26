@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+          .active{
+              border:solid 1px lightseagreen;
+              padding:5px 10px;
+          }
+          .text-danger{
+              color:red;
+          }
+          .header{
+              background-color:lightseagreen;
+          }
+          .btn{
+              background-color: gray;
+          }
+          .btn-normal{
+              border-radius: 5px;
+          }
+          .btnBig{
+              font-size: 2em;
+          }
+        </style>
+    </head>
+    <body>
+       <div id="app">
+         <div class="header" :style="[{backgroundColor:'red',color:'white'},{padding:20}]" >Hello World</div>
+         
+       </div>
+       <script>
+           Vue.component('my-button',{
+                props:["isbtnbig"],
+                template:`<button class="btn-normal" v-bind:class="{btnBig:isbtnbig}">My Button</button>`
+           })
+
+           var app = new Vue({
+               el:"#app",
+               data:{
+                inActive:false,
+                hasError:true,
+                isBtnBig:true,
+                bgColor:'red'
+               },
+               methods:{
+                    onChangeClass(){
+                        this.inActive = !this.inActive;
+                    },
+                    onChangeDangerClass(){
+                        this.hasError = !this.hasError;
+                    }
+               }
+           })
+       </script>
+    </body>
+</html>

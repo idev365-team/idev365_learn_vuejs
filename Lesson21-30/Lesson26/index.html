@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .fade-enter{
+                transform: translateX(-10px);
+                opacity: 0;
+            }
+            .fade-enter-to{
+                transform: translateX(0px);
+                opacity: 1;
+            }
+            .fade-enter-active{
+                transition: all 0.5s ease;
+            }
+            .fade-leave{
+                transform: translateX(0px);
+                opacity: 1;
+            }
+            .fade-leave-to{
+                transform: translateX(10px);
+                opacity: 0;
+            }
+            .fade-leave-active{
+                transition:all 0.5s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="toggleView">Toggle</button>
+            <div>
+                    <transition name="fade" mode="out-in">
+                        <component v-bind:is="view"></component>
+                        </transition>
+            </div>
+            
+        </div>
+        <script>
+            Vue.component('btn-on',{
+                template:`
+                    <button>on</button>
+                `
+            })
+            Vue.component('btn-off',{
+                template:`
+                    <button>off</button>
+                `
+            })
+            Vue.component('btn-three',{
+                template:`
+                    <button>three</button>
+                `
+            })
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    view:"btn-on",
+                },
+                methods:{
+                    toggleView(){
+                        if(this.view==="btn-on"){
+                            this.view = "btn-off";
+                        }else if(this.view==="btn-off"){
+                            this.view = "btn-three";
+                        }else{
+                            this.view = "btn-on";
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

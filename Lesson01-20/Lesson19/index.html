@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <base-input label="name" v-on:focus.native="onFocus"></base-input>
+        </div>
+        <script>
+            Vue.component('base-input',{
+                inheritAttrs: false,
+                props:['label', 'value'],
+                computed:{
+                    inputListeners:function(){
+                        var vm = this;
+                        return Object.assign({},this.$listeners,{
+                            input:function(event){
+                                vm.$emit('input',event.target.value)
+                            },
+                            focus:function(event){
+                                console.log("in focus")
+                            }
+                        })
+                    }
+                },
+                template:`
+                    <label>
+                        {{ label }}
+                        <input v-bind="$attrs" v-on="inputListeners">
+                    </label>
+                `
+            })
+
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                },
+                methods:{
+                    onFocus:function(){
+                        console.log("onFocus called")
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
